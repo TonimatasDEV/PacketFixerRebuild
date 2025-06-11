@@ -7,6 +7,8 @@ plugins {
     id("com.gradleup.shadow") version "9.0.0-beta15"
 }
 
+version = rootProject.version
+
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(8))
 
 dependencies {
