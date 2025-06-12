@@ -4,4 +4,5 @@ plugins {
 
 loaderModPlugin {
     minecraftVersion = "1.18"
+    javaVersion = JavaVersion.VERSION_17
 }

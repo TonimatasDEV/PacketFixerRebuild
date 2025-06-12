@@ -4,10 +4,12 @@ import dev.tonimatas.packetfixer.LoaderPlugin;
 import net.minecraftforge.gradle.userdev.UserDevExtension;
 import net.minecraftforge.gradle.userdev.UserDevPlugin;
 import org.gradle.api.Project;
+import org.gradle.api.plugins.JavaPluginExtension;
 import org.gradle.jvm.tasks.Jar;
 import org.spongepowered.asm.gradle.plugins.MixinExtension;
 import org.spongepowered.asm.gradle.plugins.MixinGradlePlugin;
 
+@SuppressWarnings("unused")
 public class ForgeModPlugin extends LoaderPlugin {
     @Override
     public void apply(Project project) {
@@ -30,15 +32,19 @@ public class ForgeModPlugin extends LoaderPlugin {
                 userDev.getCopyIdeResources().set(true);
             });
 
-            project.getTasks().named("jar", Jar.class).configure(jar -> {
-                jar.finalizedBy("reobfJar");
-            });
+            project.getTasks().named("jar", Jar.class).configure(jar -> jar.finalizedBy("reobfJar"));
             
             project.getExtensions().configure(MixinExtension.class, mixin -> {
                 String version = minecraftVersion.replaceAll("\\.", "_");
                 
                 mixin.add("main", "packetfixer.v" + version + ".forge.refmap.json");
                 mixin.config("packetfixer.v" + version + ".forge.mixins.json");
+            });
+
+            project.getExtensions().configure(JavaPluginExtension.class, java -> {
+                java.setSourceCompatibility(extension.getJavaVersion());
+                java.setTargetCompatibility(extension.getJavaVersion());
+                java.withSourcesJar();
             });
         });
     }
