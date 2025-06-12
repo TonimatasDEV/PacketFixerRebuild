@@ -2,8 +2,8 @@
   "required": true,
   "minVersion": "0.8",
   "package": "dev.tonimatas.packetfixer.v1_18_forge",
-  "compatibilityLevel": "JAVA_8",
-  "refmap": "packetfixer.v1_18.forge.refmap.json",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "packetfixer.v1_18_2.forge.refmap.json",
   "plugin": "dev.tonimatas.packetfixer.v1_18_forge.MixinPlugin",
   "injectors": {
     "defaultRequire": 0
@@ -13,6 +13,7 @@
     "ClientboundCustomQueryPacketMixin",
     "ClientboundLevelChunkPacketDataMixin",
     "CompressionDecoderMixin",
+    "CompressionEncoderMixin",
     "ConnectionMixin",
     "FriendlyByteBufMixin",
     "NbtAccounterMixin",

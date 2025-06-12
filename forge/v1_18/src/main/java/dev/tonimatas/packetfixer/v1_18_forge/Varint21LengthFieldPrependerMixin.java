@@ -1,12 +1,12 @@
 package dev.tonimatas.packetfixer.v1_18_forge;
 
 import dev.tonimatas.packetfixer.common.Config;
-import net.minecraft.network.NettyVarint21FrameEncoder;
+import net.minecraft.network.Varint21LengthFieldPrepender;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
-@Mixin(value = NettyVarint21FrameEncoder.class, priority = 1001)
+@Mixin(value = Varint21LengthFieldPrepender.class, priority = 1001)
 public class Varint21LengthFieldPrependerMixin {
     @ModifyConstant(method = "encode(Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Lio/netty/buffer/ByteBuf;)V", constant = @Constant(intValue = 3))
     private int newSize(int value) {

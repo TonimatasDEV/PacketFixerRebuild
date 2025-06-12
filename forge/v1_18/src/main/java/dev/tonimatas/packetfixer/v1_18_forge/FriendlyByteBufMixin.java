@@ -1,14 +1,14 @@
 package dev.tonimatas.packetfixer.v1_18_forge;
 
 import dev.tonimatas.packetfixer.common.Config;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.FriendlyByteBuf;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
-@Mixin(PacketBuffer.class)
+@Mixin(FriendlyByteBuf.class)
 public abstract class FriendlyByteBufMixin {
-    @ModifyConstant(method = "readNbt()Lnet/minecraft/nbt/CompoundNBT;", constant = @Constant(longValue = 2097152L))
+    @ModifyConstant(method = "readNbt()Lnet/minecraft/nbt/CompoundTag;", constant = @Constant(longValue = 2097152L))
     private long newSize(long value) {
         return Config.getNbtMaxSize();
     }
@@ -38,7 +38,7 @@ public abstract class FriendlyByteBufMixin {
         return Config.getStringSize();
     }
 
-    @ModifyConstant(method = "writeUtf(Ljava/lang/String;)Lnet/minecraft/network/PacketBuffer;", constant = @Constant(intValue = 32767))
+    @ModifyConstant(method = "writeUtf(Ljava/lang/String;)Lnet/minecraft/network/FriendlyByteBuf;", constant = @Constant(intValue = 32767))
     private int writeUtf$size(int value) {
         return Config.getStringSize();
     }

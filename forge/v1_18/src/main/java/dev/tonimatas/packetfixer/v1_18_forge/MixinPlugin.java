@@ -15,7 +15,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
     public void onLoad(String s) {
         if (isThisVersion()) {
             System.getProperties().setProperty("forge.disablePacketCompressionDebug", "true");
-            LogManager.getLogger().info("Packet Fixer forge 1.16.5 has been applied successfully.");
+            LogManager.getLogger().info("Packet Fixer forge 1.18.X has been applied successfully.");
         }
     }
 
@@ -30,8 +30,8 @@ public class MixinPlugin implements IMixinConfigPlugin {
     }
     
     private boolean isThisVersion() {
-        String minecraftVersion = FMLLoader.getLoadingModList().getModFileById("minecraft").getMods().get(0).getVersion().toString();
-        return minecraftVersion.equals("1.16.5");
+        String version = FMLLoader.getLoadingModList().getModFileById("minecraft").getMods().get(0).getVersion().toString();
+        return version.equals("1.18") || version.equals("1.18.1") || version.equals("1.18.2");
     }
 
     @Override
