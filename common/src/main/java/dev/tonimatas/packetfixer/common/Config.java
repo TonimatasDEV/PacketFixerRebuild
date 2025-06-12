@@ -33,6 +33,7 @@ public class Config {
                 properties.setProperty("stringSize", Integer.toString(32767));
                 checkVariable("chunkPacketData", Integer.toString(2097152));
                 properties.setProperty("timeout", Integer.toString(90));
+                properties.setProperty("forceUnlimitedNbtEnabled", Boolean.toString(false));
 
                 save(propertiesFile);
             }
@@ -49,6 +50,7 @@ public class Config {
             checkVariable("stringSize", Integer.toString(32767));
             checkVariable("chunkPacketData", Integer.toString(2097152));
             checkVariable("timeout", Integer.toString(90));
+            checkVariable("forceUnlimitedNbtEnabled", Boolean.toString(false));
             save(propertiesFile);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -103,6 +105,11 @@ public class Config {
     public static int getTimeout() {
         if (properties == null) runProperties();
         return Integer.parseInt(properties.getProperty("timeout"));
+    }
+    
+    public static boolean isForceUnlimitedNbtEnabled() {
+        if (properties == null) runProperties();
+        return Boolean.parseBoolean(properties.getProperty("forceUnlimitedNbtEnabled"));
     }
 
     private static void checkVariable(String variable, String defaultValue) {

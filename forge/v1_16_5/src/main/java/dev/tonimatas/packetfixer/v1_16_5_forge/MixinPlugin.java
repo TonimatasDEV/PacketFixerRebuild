@@ -1,6 +1,7 @@
 package dev.tonimatas.packetfixer.v1_16_5_forge;
 
 import net.minecraftforge.fml.loading.FMLLoader;
+import org.apache.logging.log4j.LogManager;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -12,7 +13,10 @@ import java.util.Set;
 public class MixinPlugin implements IMixinConfigPlugin {
     @Override
     public void onLoad(String s) {
-        System.getProperties().setProperty("forge.disablePacketCompressionDebug", "true");
+        if (isThisVersion()) {
+            System.getProperties().setProperty("forge.disablePacketCompressionDebug", "true");
+            LogManager.getLogger().info("Packet Fixer forge 1.16.5 has been applied successfully.");
+        }
     }
 
     @Override
@@ -22,6 +26,10 @@ public class MixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String s, String s1) {
+        return isThisVersion();
+    }
+    
+    private boolean isThisVersion() {
         String minecraftVersion = FMLLoader.getLoadingModList().getModFileById("minecraft").getMods().get(0).getVersion().toString();
         return minecraftVersion.equals("1.16.5");
     }

@@ -14,6 +14,6 @@ public class NbtAccounterMixin {
 
     @Redirect(method = "accountBits", at = @At(value = "FIELD", target = "Lnet/minecraft/nbt/NbtAccounter;quota:J"))
     private long newSize$accountBytes(NbtAccounter instance) {
-        return Config.getNbtMaxSize() < quota ? quota : Config.getNbtMaxSize();
+        return Config.isForceUnlimitedNbtEnabled() ? Config.getNbtMaxSize() : quota;
     }
 }
