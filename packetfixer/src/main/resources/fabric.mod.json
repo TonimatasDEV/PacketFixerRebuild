@@ -15,10 +15,16 @@
   "environment": "*",
   "entrypoints": {},
   "mixins": [
-    "packetfixer.v1_16_5.fabric.mixins.json"
+    "packetfixer.v1_16_5.fabric.mixins.json",
+    "packetfixer.v1_18.fabric.mixins.json"
   ],
   "depends": {
     "fabricloader": "*",
-    "minecraft": "1.16.5"
+    "minecraft": [
+      "1.16.5",
+      "1.18",
+      "1.18.1",
+      "1.18.2"
+    ]
   }
 }

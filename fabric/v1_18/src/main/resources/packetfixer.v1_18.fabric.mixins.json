@@ -1,0 +1,24 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.tonimatas.packetfixer.v1_18_fabric",
+  "compatibilityLevel": "JAVA_8",
+  "plugin": "dev.tonimatas.packetfixer.v1_18_fabric.MixinPlugin",
+  "refmap": "packetfixer.v1_18.fabric.refmap.json",
+  "injectors": {
+    "defaultRequire": 0
+  },
+  "mixins": [
+    "ClientboundCustomPayloadPacketMixin",
+    "ClientboundCustomQueryPacketMixin",
+    "ClientboundLevelChunkPacketDataMixin",
+    "CompressionDecoderMixin",
+    "ConnectionMixin",
+    "FriendlyByteBufMixin",
+    "NbtAccounterMixin",
+    "ServerboundCustomPayloadPacketMixin",
+    "ServerboundCustomQueryPacketMixin",
+    "Varint21FrameDecoderMixin",
+    "Varint21LengthFieldPrependerMixin"
+  ]
+}

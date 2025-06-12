@@ -5,8 +5,11 @@ plugins {
 
 repositories {
     gradlePluginPortal()
+    mavenCentral()
     maven("https://maven.fabricmc.net/")
+    maven("https://maven.architectury.dev/")
     maven("https://maven.minecraftforge.net/")
+    maven("https://reposilite.c0d3m4513r.com/Forge/")
     maven("https://repo.spongepowered.org/repository/maven-public/")
 }
 
