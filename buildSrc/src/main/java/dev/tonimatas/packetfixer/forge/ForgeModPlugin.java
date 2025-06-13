@@ -27,8 +27,8 @@ public class ForgeModPlugin extends LoaderPlugin {
             project.getPluginManager().apply(UserDevPlugin.class);
             project.getPluginManager().apply(MixinGradlePlugin.class);
 
-            project.getDependencies().add("implementation", project.project(":common"));
             project.getDependencies().add("minecraft", "net.minecraftforge:forge:" + minecraftVersion + "-" + extension.getForgeVersion());
+            project.getDependencies().add("implementation", project.project(":common"));
             project.getDependencies().add("annotationProcessor", "org.spongepowered:mixin:0.8.5:processor");
             
             project.getExtensions().configure(UserDevExtension.class, userDev -> {
