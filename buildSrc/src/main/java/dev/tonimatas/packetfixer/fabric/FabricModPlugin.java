@@ -5,7 +5,11 @@ import dev.tonimatas.packetfixer.LoaderPlugin;
 import net.fabricmc.loom.LoomGradlePlugin;
 import net.fabricmc.loom.api.LoomGradleExtensionAPI;
 import org.gradle.api.Project;
+import org.gradle.api.file.FileCollection;
 import org.gradle.api.plugins.JavaPluginExtension;
+import org.gradle.api.tasks.SourceSet;
+import org.gradle.api.tasks.SourceSetContainer;
+import org.gradle.api.tasks.compile.JavaCompile;
 
 @SuppressWarnings({"unused", "UnstableApiUsage"})
 public class FabricModPlugin extends LoaderPlugin {
@@ -27,10 +31,21 @@ public class FabricModPlugin extends LoaderPlugin {
             project.getDependencies().add("minecraft", "com.mojang:minecraft:" + minecraftVersion);
             project.getDependencies().add("modImplementation", "net.fabricmc:fabric-loader:" + loaderVersion);
             
-            project.getExtensions().configure(LoomGradleExtensionAPI.class, mixin -> {
-                project.getDependencies().add("mappings", mixin.officialMojangMappings());
+            project.getExtensions().configure(LoomGradleExtensionAPI.class, loom -> {
+                project.getDependencies().add("mappings", loom.officialMojangMappings());
                 String version = minecraftVersion.replaceAll("\\.", "_");
-                mixin.getMixin().add("main", "packetfixer.v" + version + ".fabric.refmap.json");
+
+                for (String projectStr : extension.getProjects()) {
+                    SourceSetContainer targetSourceSets = p.project(":fabric:" + projectStr).getExtensions().getByType(SourceSetContainer.class);
+                    SourceSet targetMain = targetSourceSets.getByName("main");
+
+                    project.getTasks().named("compileJava", JavaCompile.class).configure(compileJava -> {
+                        FileCollection extraSources = targetMain.getAllJava().getSourceDirectories();
+                        compileJava.setSource(compileJava.getSource().plus(extraSources));
+                    });
+                }
+
+                loom.getMixin().add("main", "packetfixer.v" + version + ".fabric.refmap.json");
             });
 
             project.getExtensions().configure(JavaPluginExtension.class, java -> {
