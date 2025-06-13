@@ -3,9 +3,9 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":fabric:v1_18"))
-    implementation(project(":fabric:v1_19"))
-    implementation(project(":fabric:v1_19_3"))
+    implementation(project(":fabric:java17:v1_18"))
+    implementation(project(":fabric:java17:v1_19"))
+    implementation(project(":fabric:java17:v1_19_3"))
 }
 
 loaderModPlugin {

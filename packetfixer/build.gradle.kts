@@ -9,8 +9,13 @@ plugins {
 
 version = rootProject.version
 
+tasks.register<Task>("export") {
+    dependsOn(tasks.named("mergedJar"))
+}
+
 tasks.register<Jar>("mergedJar") {
     archiveClassifier.set("merged")
+    version = "$version-1.18-1.20.4"
 
     dependsOn("jar", ":common:jar")
 
@@ -19,17 +24,17 @@ tasks.register<Jar>("mergedJar") {
 
     val loadersJars = mutableListOf<File>()
 
-    project(":fabric").subprojects.forEach { project ->
-        dependsOn(":fabric:${project.name}:remapJar")
-        val fabricJar = project(":fabric:${project.name}").tasks.named<RemapJarTask>("remapJar").get().archiveFile.get().asFile
+    project(":fabric:java17").subprojects.forEach { project ->
+        dependsOn(":fabric:java17:${project.name}:remapJar")
+        val fabricJar = project(":fabric:java17:${project.name}").tasks.named<RemapJarTask>("remapJar").get().archiveFile.get().asFile
         loadersJars.add(fabricJar)
     }
 
     val forgeMixins = mutableListOf<String>()
     
-    project(":forge").subprojects.forEach { project ->
-        dependsOn(":forge:${project.name}:jar")
-        val forgeJar = project(":forge:${project.name}").tasks.named<Jar>("jar").get().archiveFile.get().asFile
+    project(":forge:java17").subprojects.forEach { project ->
+        dependsOn(":forge:java17:${project.name}:jar")
+        val forgeJar = project(":forge:java17:${project.name}").tasks.named<Jar>("jar").get().archiveFile.get().asFile
         loadersJars.add(forgeJar)
         forgeMixins.add("packetfixer.${project.name}.forge.mixins.json")
     }
