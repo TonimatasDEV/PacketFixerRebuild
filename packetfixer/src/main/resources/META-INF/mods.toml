@@ -4,7 +4,7 @@ license="MIT"
 issueTrackerURL="https://github.com/TonimatasDEV/PacketFixer"
 
 [[mixins]]
-config="packetfixer-neoforge.mixins.json"
+config="packetfixer.v1_20_2.neoforge.mixins.json"
 
 [[mods]]
 modId="packetfixer"
@@ -19,7 +19,14 @@ A simple mod to solve various problems with packets.
 
 [[dependencies.packetfixer]]
 modId="forge"
-mandatory=true
+mandatory=false
+versionRange="[0,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.packetfixer]]
+modId="neoforge"
+mandatory=false
 versionRange="[0,)"
 ordering="NONE"
 side="BOTH"

@@ -3,13 +3,17 @@ plugins {
    java
 }
 
+group = "dev.tonimatas.packetfixer"
+version = "1.0.0"
+
 repositories {
     gradlePluginPortal()
     mavenCentral()
+    mavenLocal()
     maven("https://maven.fabricmc.net/")
     maven("https://maven.architectury.dev/")
     maven("https://maven.minecraftforge.net/")
-    maven("https://reposilite.c0d3m4513r.com/Forge/")
+    maven("https://maven.neoforged.net/releases/")
     maven("https://repo.spongepowered.org/repository/maven-public/")
 }
 

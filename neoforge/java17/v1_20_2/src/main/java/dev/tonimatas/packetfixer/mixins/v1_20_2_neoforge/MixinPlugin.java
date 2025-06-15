@@ -1,6 +1,6 @@
-package dev.tonimatas.packetfixer.mixins.v1_19_3_forge;
+package dev.tonimatas.packetfixer.mixins.v1_20_2_neoforge;
 
-import net.minecraftforge.fml.loading.FMLLoader;
+import net.neoforged.fml.loading.FMLLoader;
 import org.apache.logging.log4j.LogManager;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
@@ -14,8 +14,8 @@ public class MixinPlugin implements IMixinConfigPlugin {
     @Override
     public void onLoad(String s) {
         if (isThisVersion()) {
-            System.getProperties().setProperty("forge.disablePacketCompressionDebug", "true");
-            LogManager.getLogger().info("Packet Fixer forge 1.19.3 has been applied successfully.");
+            System.getProperties().setProperty("neoforge.disablePacketCompressionDebug", "true");
+            LogManager.getLogger().info("Packet Fixer neoforge 1.20.2-1.20.4 has been applied successfully.");
         }
     }
 
@@ -30,14 +30,8 @@ public class MixinPlugin implements IMixinConfigPlugin {
     }
     
     private boolean isThisVersion() {
-        try {
-            Class.forName("net.neoforged.fml.loading.FMLLoader");
-            return false;
-        } catch (ClassNotFoundException ignored) {
-        }
-
-        String version = FMLLoader.getLoadingModList().getModFileById("minecraft").getMods().get(0).getVersion().toString();
-        return version.equals("1.19.3");
+        String version = FMLLoader.versionInfo().mcVersion();
+        return version.equals("1.20.2") || version.equals("1.20.3") || version.equals("1.20.4");
     }
 
     @Override

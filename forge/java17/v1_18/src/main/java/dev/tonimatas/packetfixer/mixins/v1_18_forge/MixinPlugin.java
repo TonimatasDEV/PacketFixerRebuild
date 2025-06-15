@@ -30,6 +30,12 @@ public class MixinPlugin implements IMixinConfigPlugin {
     }
     
     private boolean isThisVersion() {
+        try {
+            Class.forName("net.neoforged.fml.loading.FMLLoader");
+            return false;
+        } catch (ClassNotFoundException ignored) {
+        }
+
         String version = FMLLoader.getLoadingModList().getModFileById("minecraft").getMods().get(0).getVersion().toString();
         return version.equals("1.18") || version.equals("1.18.1") || version.equals("1.18.2");
     }
