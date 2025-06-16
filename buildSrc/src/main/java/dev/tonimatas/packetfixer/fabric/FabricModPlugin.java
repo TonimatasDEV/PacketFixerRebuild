@@ -1,6 +1,5 @@
 package dev.tonimatas.packetfixer.fabric;
 
-import dev.tonimatas.packetfixer.LoaderExtension;
 import dev.tonimatas.packetfixer.LoaderPlugin;
 import net.fabricmc.loom.LoomGradlePlugin;
 import net.fabricmc.loom.api.LoomGradleExtensionAPI;
@@ -16,7 +15,7 @@ public class FabricModPlugin extends LoaderPlugin {
     @Override
     public void apply(Project project) {
         super.apply(project);
-        LoaderExtension extension= project.getExtensions().create("loaderModPlugin", LoaderExtension.class);
+        FabricLoaderExtension extension = project.getExtensions().create("loaderModPlugin", FabricLoaderExtension.class);
         
         String loaderVersion = (String) project.getRootProject().findProperty("loaderVersion");
         
@@ -30,9 +29,14 @@ public class FabricModPlugin extends LoaderPlugin {
             project.getDependencies().add("implementation", project.project(":common"));
             project.getDependencies().add("minecraft", "com.mojang:minecraft:" + minecraftVersion);
             project.getDependencies().add("modImplementation", "net.fabricmc:fabric-loader:" + loaderVersion);
+            
+            if (extension.getFabricVersion() != null) {
+                project.getDependencies().add("modImplementation", "net.fabricmc.fabric-api:fabric-api:" + extension.getFabricVersion() + "+" + extension.getMinecraftVersion());
+            }
 
             for (String projectStr : extension.getProjects()) {
-                SourceSetContainer targetSourceSets = p.project(":fabric:java17:" + projectStr).getExtensions().getByType(SourceSetContainer.class);
+                String javaVersionStr = extension.getJavaVersion().toString().replaceAll("VERSION_", "");
+                SourceSetContainer targetSourceSets = p.project(":fabric:java" + javaVersionStr + ":" + projectStr).getExtensions().getByType(SourceSetContainer.class);
                 SourceSet targetMain = targetSourceSets.getByName("main");
 
                 project.getTasks().named("compileJava", JavaCompile.class).configure(compileJava -> {
@@ -45,6 +49,7 @@ public class FabricModPlugin extends LoaderPlugin {
                 project.getDependencies().add("mappings", loom.officialMojangMappings());
                 String version = minecraftVersion.replaceAll("\\.", "_");
                 loom.getMixin().add("main", "packetfixer.v" + version + ".fabric.refmap.json");
+                loom.getMods().create("packetfixer").sourceSet("main");
             });
             
             project.getExtensions().configure(JavaPluginExtension.class, java -> {

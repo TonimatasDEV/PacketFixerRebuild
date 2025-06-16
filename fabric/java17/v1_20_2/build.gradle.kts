@@ -12,4 +12,5 @@ loaderModPlugin {
     minecraftVersion = "1.20.4"
     javaVersion = JavaVersion.VERSION_17
     projects = listOf("v1_19_3")
+    fabricVersion = "0.97.2"
 }
