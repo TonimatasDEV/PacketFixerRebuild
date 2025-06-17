@@ -9,17 +9,17 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 @Mixin(value = VarInt.class, priority = 1001)
 public class VarIntMixin {
     @ModifyConstant(method = "getByteSize", constant = @Constant(intValue = 5))
-    private static int getByteSize$size(int value) {
+    private static int packetfixer$getByteSize$newSize(int value) {
         return Config.getVarIntSize();
     }
     
     @ModifyConstant(method = "read", constant = @Constant(intValue = 5))
-    private static int read$size(int value) {
+    private static int packetfixer$read$newSize(int value) {
         return Config.getVarIntSize();
     }
 
     @ModifyConstant(method = "read", constant = @Constant(stringValue = "VarInt too big"))
-    private static String read$size(String constant) {
+    private static String packetfixer$read$newSize(String constant) {
         return "VarInt too big. Packet Fixer configured to " + Config.getVarIntSize() + ". You can modify it in the Packet Fixer config.";
     }
 }

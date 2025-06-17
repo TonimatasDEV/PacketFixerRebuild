@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 @Mixin(CompressionDecoder.class)
 public class CompressionDecoderMixin {
     @ModifyConstant(method = "decode", constant = @Constant(intValue = 8388608))
-    private int newSize(int value) {
+    private int packetfixer$newSize(int value) {
         return Config.getDecoderSize();
     }
 }

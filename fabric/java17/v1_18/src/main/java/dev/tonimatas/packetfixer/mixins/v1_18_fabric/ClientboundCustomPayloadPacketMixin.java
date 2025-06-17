@@ -10,12 +10,12 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 @Mixin(ClientboundCustomPayloadPacket.class)
 public class ClientboundCustomPayloadPacketMixin {
     @ModifyConstant(method = "<init>*", constant = @Constant(intValue = 1048576))
-    private int packet$newSize(int value) {
+    private int packetfixer$newSize(int value) {
         return Config.getPacketSize();
     }
 
     @ModifyConstant(method = "<init>*", constant = @Constant(stringValue = "Payload may not be larger than 1048576 bytes"))
-    private String packet$newMessage(String value) {
+    private String packetfixer$newMessage(String value) {
         return Messages.getPayloadMessage();
     }
 }

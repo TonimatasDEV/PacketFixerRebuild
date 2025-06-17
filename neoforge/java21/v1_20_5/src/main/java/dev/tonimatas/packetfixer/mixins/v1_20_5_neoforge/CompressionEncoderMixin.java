@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 @Mixin(CompressionEncoder.class)
 public class CompressionEncoderMixin {
     @ModifyConstant(method = "encode(Lio/netty/channel/ChannelHandlerContext;Lio/netty/buffer/ByteBuf;Lio/netty/buffer/ByteBuf;)V", constant = @Constant(intValue = 8388608))
-    private int newSize(int value) {
+    private int packetfixer$newSize(int value) {
         return Config.getDecoderSize();
     }
 }

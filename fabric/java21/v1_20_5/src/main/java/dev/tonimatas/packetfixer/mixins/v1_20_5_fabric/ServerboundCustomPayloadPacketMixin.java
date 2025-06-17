@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 @Mixin(ServerboundCustomPayloadPacket.class)
 public class ServerboundCustomPayloadPacketMixin {
     @ModifyConstant(method = "method_56475", constant = @Constant(intValue = 32767))
-    private static int newSize(int value) {
+    private static int packetfixer$newSize(int value) {
         return Config.getPacketSize();
     }
 }

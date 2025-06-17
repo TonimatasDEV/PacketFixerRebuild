@@ -13,7 +13,7 @@ public class NbtAccounterMixin {
     @Shadow @Final private long quota;
 
     @Redirect(method = "accountBits", at = @At(value = "FIELD", target = "Lnet/minecraft/nbt/NbtAccounter;quota:J"))
-    private long newSize$accountBytes(NbtAccounter instance) {
+    private long packetfixer$newSize(NbtAccounter instance) {
         return Config.isForceUnlimitedNbtEnabled() ? Long.MAX_VALUE : quota;
     }
 }

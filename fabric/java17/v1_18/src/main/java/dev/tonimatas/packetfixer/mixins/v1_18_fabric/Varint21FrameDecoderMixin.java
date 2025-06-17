@@ -20,12 +20,12 @@ public abstract class Varint21FrameDecoderMixin {
     private int packetFixer$varInt21Size = 10;
     
     @Inject(method = "decode", at = @At("HEAD"))
-    private void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List<Object> list, CallbackInfo ci) {
+    private void packetfixer$checkSize(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List<Object> list, CallbackInfo ci) {
         packetFixer$varInt21Size = FriendlyByteBuf.getVarIntSize(byteBuf.readableBytes()) + 2;
     }
     
     @ModifyConstant(method = "decode", constant = @Constant(intValue = 3))
-    private int newSize(int constant) {
+    private int packetfixer$newSize(int constant) {
         return packetFixer$varInt21Size;
     }
 }

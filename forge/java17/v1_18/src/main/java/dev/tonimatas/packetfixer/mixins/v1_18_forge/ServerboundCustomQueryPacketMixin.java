@@ -10,12 +10,12 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 @Mixin(ServerboundCustomQueryPacket.class)
 public class ServerboundCustomQueryPacketMixin {
     @ModifyConstant(method = "<init>(Lnet/minecraft/network/FriendlyByteBuf;)V", constant = @Constant(intValue = 1048576))
-    private static int newSize(int value) {
+    private static int packetfixer$newSize(int value) {
         return Config.getPacketSize();
     }
 
     @ModifyConstant(method = "<init>(Lnet/minecraft/network/FriendlyByteBuf;)V", constant = @Constant(stringValue = "Payload may not be larger than 1048576 bytes"))
-    private static String newSize(String value) {
+    private static String packetfixer$newMessage(String value) {
         return Messages.getPayloadMessage();
     }
 }
