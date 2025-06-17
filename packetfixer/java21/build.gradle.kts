@@ -29,11 +29,11 @@ tasks.register<Jar>("mergedJar") {
         loadersJars.add(fabricJar)
     }
 
-    //project(":neoforge:java21").subprojects.forEach { project ->
-    //    dependsOn(":neoforge:java21:${project.name}:jar")
-    //    val neoforgeJar = project(":neoforge:java21:${project.name}").tasks.named<Jar>("jar").get().archiveFile.get().asFile
-    //    loadersJars.add(neoforgeJar)
-    //}
+    project(":neoforge:java21").subprojects.forEach { project ->
+        dependsOn(":neoforge:java21:${project.name}:jar")
+        val neoforgeJar = project(":neoforge:java21:${project.name}").tasks.named<Jar>("jar").get().archiveFile.get().asFile
+        loadersJars.add(neoforgeJar)
+    }
 
     manifest {
         attributes(

@@ -1,4 +1,4 @@
-package dev.tonimatas.packetfixer.mixins.v1_20_2_neoforge;
+package dev.tonimatas.packetfixer.mixins.v1_20_5_neoforge;
 
 import net.neoforged.fml.loading.FMLLoader;
 import org.apache.logging.log4j.LogManager;
@@ -15,7 +15,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
     public void onLoad(String s) {
         if (isThisVersion()) {
             System.getProperties().setProperty("neoforge.disablePacketCompressionDebug", "true");
-            LogManager.getLogger().info("Packet Fixer neoforge 1.20.2-1.20.4 has been applied successfully.");
+            LogManager.getLogger().info("Packet Fixer neoforge 1.20.5-1.20.5 has been applied successfully.");
         }
     }
 
@@ -31,7 +31,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
     
     private boolean isThisVersion() {
         String version = FMLLoader.versionInfo().mcVersion();
-        return version.equals("1.20.2") || version.equals("1.20.3") || version.equals("1.20.4");
+        return version.equals("1.20.5") || version.equals("1.20.6") || version.equals("1.21") || version.equals("1.21.1") || version.equals("1.21.2") || version.equals("1.21.3") || version.equals("1.21.4") || version.equals("1.21.5");
     }
 
     @Override

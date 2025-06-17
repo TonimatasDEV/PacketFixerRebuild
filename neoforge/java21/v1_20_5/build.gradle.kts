@@ -9,23 +9,23 @@ plugins {
 version = rootProject.version
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
     withSourcesJar()
 }
 
 mixin {
-    config("packetfixer.v1_20_2.neoforge.mixins.json")
+    config("packetfixer.v1_20_5.neoforge.mixins.json")
 }
 
 minecraft {
     mappings {
-        version.put("minecraft", "1.20.4")
+        version.put("minecraft", "1.21.6")
     }
 }
 
 dependencies {
-    implementation("net.neoforged:neoforge:20.4.248")
+    implementation("net.neoforged:neoforge:21.6.0-beta")
     implementation(project(":common"))
 }
 

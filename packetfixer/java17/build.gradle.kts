@@ -16,7 +16,7 @@ tasks.register<Task>("export") {
 
 tasks.register<Jar>("mergedJar") {
     archiveClassifier.set("merged")
-    version = "$version-1.20.5-1.21.5"
+    version = "$version-1.18-1.20.4"
 
     dependsOn("jar", ":common:jar")
 
@@ -40,11 +40,11 @@ tasks.register<Jar>("mergedJar") {
         forgeMixins.add("packetfixer.${project.name}.forge.mixins.json")
     }
 
-    //project(":neoforge:java17").subprojects.forEach { project ->
-    //    dependsOn(":neoforge:java17:${project.name}:jar")
-    //    val neoforgeJar = project(":neoforge:java17:${project.name}").tasks.named<Jar>("jar").get().archiveFile.get().asFile
-    //    loadersJars.add(neoforgeJar)
-    //}
+    project(":neoforge:java17").subprojects.forEach { project ->
+        dependsOn(":neoforge:java17:${project.name}:jar")
+        val neoforgeJar = project(":neoforge:java17:${project.name}").tasks.named<Jar>("jar").get().archiveFile.get().asFile
+        loadersJars.add(neoforgeJar)
+    }
 
     manifest {
         attributes(

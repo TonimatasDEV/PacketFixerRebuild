@@ -35,7 +35,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
 
         if (modContainer.isPresent()) {
             String version = modContainer.get().getMetadata().getVersion().getFriendlyString();
-            return version.equals("1.20.5") || version.equals("1.20.6") || version.equals("1.21") || version.equals("1.21.1") || version.equals("1.21.2") || version.equals("1.21.3") || version.equals("1.21.4") || version.equals("1.21.5");
+            return version.equals("1.20.5") || version.equals("1.20.6") || version.equals("1.21") || version.equals("1.21.1") || version.equals("1.21.2") || version.equals("1.21.3") || version.equals("1.21.4") || version.equals("1.21.5") || version.equals("1.21.6");
         }
 
         return false;
