@@ -1,3 +1,1 @@
-# Packet Fixer Rebuild
-
-Packet Fixer Rebuild is the new build system of Packet Fixer.
+# Merged into https://github.com/TonimatasDEV/PacketFixer
